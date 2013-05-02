@@ -147,13 +147,22 @@ def image(request):
 		# 	return render_to_response(template, vars)
 		if sub3 != "":
 			if simg != "":
-				vidon = Objecttype.objects.get(title="Image")
-				vido_new = vidon.get_nbh['contains_members']
-				vido = vido_new.filter(title__contains=simg)
-				vido2 = vido.order_by(sub3)
-				variables = RequestContext(request,{'images':vido2,'val':simg})
-				template = "gstudio/image.html"
-				return render_to_response(template, variables)
+				if sub3 == "title":
+					vidon = Objecttype.objects.get(title="Image")
+					vido_new = vidon.get_nbh['contains_members']
+					vido = vido_new.filter(title__icontains=simg)
+					vido2 = vido.order_by(sub3)
+					variables = RequestContext(request,{'images':vido2,'val':simg})
+					template = "gstudio/image.html"
+					return render_to_response(template, variables)
+				else:
+					vidon = Objecttype.objects.get(title="Image")
+					vido_new = vidon.get_nbh['contains_members']
+					vido = vido_new.filter(creation_date__icontains=simg)
+					vido2 = vido.order_by(sub3)
+					variables = RequestContext(request,{'images':vido2,'val':simg})
+					template = "gstudio/image.html"
+					return render_to_response(template, variables)
 			else:
 				vidon = Objecttype.objects.get(title="Image")
 				vido_new = vidon.get_nbh['contains_members']
