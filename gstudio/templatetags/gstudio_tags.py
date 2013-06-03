@@ -531,3 +531,8 @@ def get_pri_post_page():
     for each in gbobject:
         listobject.append(each.__str__())
     return str(listobject)
+
+@register.inclusion_tag('gstudio/addingrate.html')
+def adding_rating(object_to_rate):
+    template='gstudio/addingrate.html'
+    return {'template':template,'object':object_to_rate,'javascriptRate':"javascript"}

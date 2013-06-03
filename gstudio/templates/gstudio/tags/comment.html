@@ -53,9 +53,7 @@ document.forms["response"].submit();
 !-->
 
 <span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}}<a href="#res{{child.id}}">Right Click to copy link</a>
-{% if child.rating.get_rating %}
-<h5>Current rating is {{ child.rating.get_rating }}<h5/>
-{% endif %}</span>
+</span>
 <font style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}E81809{%endif%};" size = 3>
 	{% with child.html_content|safe as child_content %}
 	     {{child_content}}
@@ -76,18 +74,9 @@ document.forms["response"].submit();
                                 <input type="submit" class="submitdelete" id="delete{{child.id}}" value="Delete" onclick="deleteclick(document.getElementById('hidden{{child.id}}').value)">
 
 <br/>
-<div class="rating">
-     Rate the response </br>
-                 <input name="star1" type="radio" value=1 class="star"/>
-                <input name="star1" type="radio" value=2 class="star"/>
-                <input name="star1" type="radio" value=3 class="star"/>
-                <input name="star1" type="radio" value=4 class="star"/>
-                <input name="star1" type="radio" value=5 class="star"/>
-  <!--topic id and user id hidden fields-->
-                </br>
-                <input type="submit" value="Rate Response">
-</div>
                                 </form>
+<!--ADDING AND DISPLAY rating -->
+	{% adding_rating child  %}
 </div>
 
 		<div id="response{{child.id}}">
@@ -110,10 +99,8 @@ else
 document.getElementById("divchange").setAttribute("id","div2");
 }
 </script>!-->
-<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a> <br/>
-{% if child.rating.get_rating %}
-Current rating is {{ child.rating.get_rating }}</span><br/>
-{% endif %}
+<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a> <br/></span>
+
                         <font style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}E81809{%endif%};" size ="3">
 				{% with child.html_content|safe as child_content %}
 			   	     {{child_content}}
@@ -136,19 +123,10 @@ Current rating is {{ child.rating.get_rating }}</span><br/>
                                 <input type="checkbox" class="chkdel" id="chk{{child.id}}" name="del_comment" value="delete_comment">
                                 <input type="submit" class="submitdelete" id="delete{{child.id}}" value="Delete" onclick="deleteclick(document.getElementById('hidden{{child.id}}').value)">
 
-<br/>
-<div class="rating">
-     Rate the response </br>
-                                <input name="star1" type="radio" value=1 class="star"/>
-<input name="star1" type="radio" value=2 class="star"/>
-                <input name="star1" type="radio" value=3 class="star"/>
-                <input name="star1" type="radio" value=4 class="star"/>
-                <input name="star1" type="radio" value=5 class="star"/>
-                <!--topic id and user id hidden fields-->
-                </br>
-                <input type="submit" value="Rate Response">
-</div>
+				<br/>
                                 </form>
+				<!--ADDING AND DISPLAY rating -->
+				{% adding_rating child  %}
 </div>
 		<div id="response{{child.id}}">
                                 {% show_comment child idusr flag admin_id attribute%}
@@ -170,10 +148,8 @@ else
 document.getElementById("divchange").setAttribute("id","div2");
 }
 </script>!-->
-<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a><br/>
-{% if child.rating.get_rating %}
-Current rating is {{ child.rating.get_rating }}</span><br/>
-{% endif %}
+<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a><br/></span>
+
                         <font style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}E81809{%endif%};" size = 3>
 				{% with child.html_content|safe as child_content %}
 			   	     {{child_content}}
@@ -209,17 +185,8 @@ Current rating is {{ child.rating.get_rating }}</span><br/>
 {% endifequal %}
 {% endfor %}
 
-<div class="rating">                                                                                                                       
-     Rate this response </br>                                                                                                        
-                                <input name="star1" type="radio" value=1 class="star"/>                                              
-                <input name="star1" type="radio" value=2 class="star"/>                                                              
-                <input name="star1" type="radio" value=3 class="star"/>                                                              
-                <input name="star1" type="radio" value=4 class="star"/>                                                              
-                <input name="star1" type="radio" value=5 class="star"/>                                                              
-                <!--topic id and user id hidden fields-->                                                                            
-                </br>                                       
- <input type="submit" value="Rate Response">                                                                          
-</div>            
+<!--ADDING AND DISPLAY rating -->
+	{% adding_rating child  %}         
            {% endif %}                                                                                                  
       </form>                                                                          
                  
@@ -247,11 +214,8 @@ else
 document.getElementById("divchange").setAttribute("id","div2");
 }
 </script>!-->
-<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a><br/>
-{% if child.rating.get_rating %}
-Current rating is {{ child.rating.get_rating }}</span><br/>
-{% endif %}
-                        <font style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}E81809{%endif%};" size = 3>
+<span style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}000000{%endif%};">{{each}}'s Response at {{child.creation_date}} <a href="#res{{child.id}}">Right Click to copy link</a><br/></span>
+            <font style = "color:#{% if child.get_object_fontcolor %}{{ child.get_object_fontcolor}}{%else%}E81809{%endif%};" size = 3>
 				{% with child.html_content|safe as child_content %}
 			   	     {{child_content}}
 				{% endwith %}
@@ -286,17 +250,8 @@ Current rating is {{ child.rating.get_rating }}</span><br/>
 {% endifequal %}
 {% endfor %}
 
-<div class="rating">                                                                                                                       
-     Rate this response </br>                                                                                                        
-                                <input name="star1" type="radio" value=1 class="star"/>                                              
-                <input name="star1" type="radio" value=2 class="star"/>                                                              
-                <input name="star1" type="radio" value=3 class="star"/>                                                              
-                <input name="star1" type="radio" value=4 class="star"/>                                                              
-                <input name="star1" type="radio" value=5 class="star"/>                                                              
-                <!--topic id and user id hidden fields-->                                                                            
-                </br>                                       
- <input type="submit" value="Rate Response">                                                                          
-</div>            
+<!--ADDING AND DISPLAY rating -->
+	{% adding_rating child  %}           
            {% endif %}                                                                                                  
       </form>                                                                          
                  
