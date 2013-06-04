@@ -481,9 +481,9 @@ def edit_title(request):
 		nid.save()
 		nid=NID.objects.get(id=titleid)
 		nidtitle = nid.title
-  	t = get_template('gstudio/editedobjecttitle.html')
-	html = t.render(Context({'title':nidtitle}))
-	return HttpResponse(html)
+  	#t = get_template('gstudio/editedobjecttitle.html')
+	#html = t.render(Context({'title':nidtitle}))
+	return HttpResponse(nidtitle)
 
 
 def addpriorpost(request):

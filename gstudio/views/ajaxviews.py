@@ -735,7 +735,17 @@ def ajaxReleaseBlockResponseOfTwist(request):
 					
     return HttpResponse("sucess")
 	
-                    
+def ajaxRateIt(request):
+    objectid = ""
+    rating = ""
+    if request.is_ajax() and request.method =="POST":
+        objectid = request.POST['objectid']
+        rating = request.POST['data']
+    ob = Gbobject.objects.get(id=objectid)
+    ob.rating.add(score=rating ,user=request.user, ip_address=request.META['REMOTE_ADDR'])
+    variables = RequestContext(request, { 'object' : ob})
+    template = "gstudio/addingrate.html"
+    return render_to_response(template,variables) 
                 
                 
 
