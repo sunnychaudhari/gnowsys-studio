@@ -1,0 +1,83 @@
+<style>
+.shakeimage{
+position:relative
+}
+</style>
+<script language="JavaScript" src="{{ STATIC_URL }}iconwrite/proj.js"></script>
+
+
+
+{% load adminmedia grp_tags %}
+	
+	{% if reportid %}
+
+	<h4><font color="red">this image is already uploaded on this site</font></h4>
+	
+	{% endif %}
+
+
+	<div>                 
+		<table border="1" style="">	
+		<tr>	
+		{% for image in verbimage %}
+	
+			<form method="post" action="/iconwrite/">{% csrf_token %}
+	        	<input type="hidden" name="fulid" value={{image.id}}>		
+
+	        	<td><img src="{% admin_media_prefix %}img/Vericons/{{image.image}}" height="150" width="194" name="{{image.title}}" onclick="disp_but2(src,name)" class="shakeimage" onMouseover="init(this);rattleimage()" onMouseout="stoprattle(this);top.focus()" /><br>
+			
+
+			<h4 align="center">{{image.title}}</h4>
+			
+			{% for author in image.authors.all %}
+			
+				{% ifequal author.username user.username %}
+				<input type="hidden" name="pict" value={{image.id}}>
+			 	<input type="submit" name="delete" value="Delete" onclick="return makesure();"> 
+				
+				<input type="hidden" name="user" value={{user.username}}>
+				</form>
+				<script type="text/javascript">
+ 				function makesure()
+				 {
+  					if (confirm('Are you sure you want to delete this image?'))
+					 {
+    						return true;
+  					 }
+  					else
+					 {
+    						return false;
+  					 }
+ 				}
+				</script>
+			
+				{% else %}
+				<script type="text/javascript">
+				function myFunction()
+				{
+					alert("You are not authorised to delete other users image!");
+				}
+				</script>
+ 
+				<input type="button" onclick="myFunction()" value="Delete" style="visibility:hidden" />
+		
+				{% endifequal %}
+			{% endfor %}			
+
+			</td>
+	
+			{% if forloop.counter|divisibleby:"4"  %}
+
+			</tr>
+			<tr>
+
+			{% endif %}
+
+		{% endfor %}
+
+		</tr>
+		</table>			
+
+	</div>
+
+

@@ -1,0 +1,57 @@
+<style>
+.shakeimage{
+position:relative
+}
+</style>
+<script language="JavaScript" src="{{ STATIC_URL }}iconwrite/proj.js"></script>
+
+
+<!---->
+
+
+<!---->
+
+
+
+
+
+{% load adminmedia grp_tags %}
+
+	
+	{% if reportid %}
+
+		<h4><font color="red">this image is already uploaded on this site</font></h4>
+		
+	{% endif %}
+	
+	
+	<div>                 
+		<table border="1">	
+		<tr>	
+		{% for image in subjectimage %}
+	
+			<form method="post" action="/iconwrite/">{% csrf_token %}
+	        	<input type="hidden" name="fulid" value={{image.id}}>	
+			
+			
+	        	<td><img src="{% admin_media_prefix %}img/Subicons/{{image.image}}" height="100" width="100" name="{{image.title}}" onclick="chatDivSub('{{user.username}}',name,src)" value={{user.username}} class="shakeimage" onMouseover="init(this);rattleimage()" onMouseout="stoprattle(this);top.focus()" border="2" bordercolor="#000000" id="border"/><br>
+			
+			<h4 align="center">{{image.title}}</h4>
+			
+			</td>
+	
+			{% if forloop.counter|divisibleby:"3"  %}
+
+			</tr>
+			<tr>
+
+			{% endif %}
+
+		{% endfor %}
+
+		</tr>
+		</table>			
+
+	</div>
+
+

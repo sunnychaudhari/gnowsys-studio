@@ -1,0 +1,327 @@
+{% extends "gstudio/base.html" %}
+{% load gstudio_tags %}
+{% load i18n %}
+{% load adminmedia  grp_tags %}
+{% load pagination_tags %}
+{% block title %}IconWrite App{% endblock %}
+
+{% block stylesheets %}
+		 
+		<link href="{% admin_media_prefix %}css/base.css" rel="stylesheet" type="text/css" />		
+		<link rel="stylesheet" type="text/css" media="screen, projection" href="{{ STATIC_URL }}gstudio/css/screen.css" />
+		<!--<link rel="stylesheet" type="text/css" href="/static/iconwrite/proj.css">--> 
+{% endblock %}
+
+{% block content %}	
+
+			
+			<!--				-->
+
+
+
+		
+<style type="text/css">
+/* Loading Circle */
+.ball {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(0,183,229,0.9);
+	opacity:.9;
+	border-top:5px solid rgba(0,0,0,0);
+	border-left:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 35px #2187e7;
+	width:50px;
+	height:50px;
+	margin:0 auto;
+	-moz-animation:spin .5s infinite linear;
+	
+	
+}
+
+.ball1 {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(0,183,229,0.9);
+	opacity:.9;
+	border-top:5px solid rgba(0,0,0,0);
+	border-left:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 15px #2187e7; 
+	width:30px;
+	height:30px;
+	margin:0 auto;
+	position:relative;
+	top:-50px;
+	-moz-animation:spinoff .5s infinite linear;
+	
+	
+	
+}
+
+@-moz-keyframes spin {
+	0% { -moz-transform:rotate(0deg); }
+	100% { -moz-transform:rotate(360deg); }
+}
+@-moz-keyframes spinoff {
+	0% { -moz-transform:rotate(0deg); }
+	100% { -moz-transform:rotate(-360deg); }
+}
+
+
+
+</style>		
+
+<script language="javascript">
+function call1()
+{
+$.ajax({
+	url: 'http://api.mymemory.translated.net/get',
+	//type: 'POST',
+	data: {q:"Hello World!",langpair:"en|it"},
+        beforeSend: function() {
+              
+              
+                              },
+	success: function(data){
+	var abc = data;
+
+        alert(data.responseData.translatedText);
+        
+
+			     },
+        complete: function(){
+     
+	
+		  }
+
+});  
+}
+</script>
+
+	  
+		<script language="JavaScript" src="{{ STATIC_URL }}iconwrite/disp_functions.js"></script>	
+
+				
+		
+		<!---->
+		
+		<img src="{{ STATIC_URL }}iconwrite/logo2.png" align="left" height="67" width="113">			
+		
+		<h2><center><script language="JavaScript" src="{{ STATIC_URL }}iconwrite/spotlight.js"></script></center></h2>
+
+		<b><script language = "JavaScript" src="{{ STATIC_URL }}iconwrite/date.js"></script></b><br>
+		
+	
+ 		
+
+		<!---->
+
+		<!--First div (Place where sentence will generate)-->
+		<div style=" width: 900px ; height:50px; top:50px; border:3px solid #888888;font-size:25px;margin-left: -63px" id="sentence">
+			<div id="marq">
+			
+				<h3 align ="center">
+						
+				<font color="#1589FF">Click on the icons below to say</font></h3> 	
+				
+			
+				
+			</div>
+
+		
+			<!---->
+			<div>
+			
+			<span id="sentence_sub"></span>&nbsp;
+				<span id="sentence_ver"></span>&nbsp;
+					<span id="sentence_obj"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+
+			<span id="refresh" style="display:none;">
+
+				<img src="{{ STATIC_URL }}iconwrite/refresh.png" width="40" height="40" alt="refresh" onClick="reload();" />
+			
+					
+			</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<span id="Audio" style="display:none;">
+
+				<a id="audio" href="">
+				<img src="{{ STATIC_URL }}iconwrite/audio-icon.png" width="35" height="35" alt="Audio" onClick="Audio();" />
+				</a>	
+			</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<span id="Translate" style="display:none;">
+				
+				<a id="trans">
+				<img src="{{ STATIC_URL }}iconwrite/lang_translate.jpg" width="35" height="35" alt="translator" onClick="trans();" />	
+					
+				</a>			
+			</span>
+						
+			</div>
+		
+			
+		</div>
+
+	<!--	<img style="margin-left:133px; margin-top:62px" src="{{ STATIC_URL }}iconwrite/list.png" width="20" height="20" alt="Selector" onClick="" />-->
+		
+		<select style="margin-left:133px; margin-top:62px; width:24px" id="Select1" name="Modify" >
+		<option onclick="ModifySub()">Edit Title</option>
+		<option onclick="Question()">Question</option>		
+		<option onclick="Scale()">Scale</option>
+		<option onclick="Scope()">Scope</option>
+		</select>
+
+
+		<select style="margin-left:230px; margin-top:62px; width:24px" id="Select2" name="Modify" >
+		<option>Present</option>
+		<option>Past</option>
+		<option>Future</option>
+		</select>
+
+
+		<select style="margin-left:241px; margin-top:62px; width:24px" id="Select3" name="Modify" >
+		<option onclick="ModifyObj()">Edit Title</option>
+		<option>Scale</option>
+		<option>Scope</option>
+		</select>
+		
+		
+
+		<div id="MyCart" style="width:355px; height:289px; top:300px; border:3px solid #888888;margin-top: -149px;margin-left: 840px">
+				
+			<div style="width:355px; height:30px; border:1px solid #888888;"><h3><font size="3">Select Choices</font></h3>
+				<div style="width:355px; height:215px;">
+				<span id="Cart_subimg"></span><span id="Cart_subtitl"></span>&nbsp;
+					<span id="Cart_verimg"></span><span id="Cart_vertitl"></span>&nbsp;
+						<span id="Cart_objimg"></span><span id="Cart_objtitl"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				</div>
+
+				
+				
+			</div>
+				
+					
+		</div>
+
+<!--		<form name="myForm">
+				<select style="margin-left:133px; margin-top:62px" width="20" height="20" id="Select" name="Modify" >	--> 
+	<!--onchange="grabSelection()"-->
+		<!--		<option>Item 1</option>
+				<option>Item 2</option>
+				<option>Item 3</option>
+				</select>
+		</form>-->	
+
+		
+
+
+		<!-- following are Sub, Ver, Obj Buttons-->
+		<div style=" width:1200px; top:50px;">	
+		
+		<input type="button" class="button1" value="Subject" id="img1" onClick="div1()">
+							
+					
+		<input type="button" class="button2" value="Verb" id="img2" onClick="div2()" >
+
+		<input type="button" class="button3" value="Object" id="img3" onClick="div3()" >
+	
+		</div>
+
+		
+		
+		<!--uploading images-->
+		<div style=" margin-left: -50px;width:1000px; margin-top:-78px;">
+			{% if user.is_authenticated %}
+	
+		
+			<form name = "subform" enctype="multipart/form-data" method="POST" action="/iconwrite/subject/" >
+			{% csrf_token %}
+
+			<b style="color: black; margin-left: 0px;">Post Image:</b><br/>
+
+						Title	: &nbsp;<input type="text" name="title1" />
+			&nbsp;&nbsp;&nbsp;&nbsp;Image	: &nbsp;<input type=file name="image[]" multiple="multiple" />
+			&nbsp;&nbsp;&nbsp;&nbsp;Category: &nbsp;<input type="radio" name="choose" value="Subject" />Subject
+								<input type="radio" name="choose" value="Verb"/>Verb
+								<input type="radio" name="choose" value="Object"/>Object
+
+			<input type="hidden" name="user" value={{user.username}}>
+			&nbsp;&nbsp;<input type="submit" value="  Post  " size="900" name="post" />
+			</form>
+		
+			{% endif %}
+		
+		</div>
+		
+
+					
+
+			
+		
+<!-- Image Library ( This div Shows Icons of Subjects)-->
+		<div id="sub" style="overflow:auto; width:900px; height:420px; top:315px; border:3px solid #888888;margin-top: 14px;margin-left: -63px">
+			
+			<!-- for load image icon animation-->
+			<div id="loader">
+			 <div id="load1" style="margin-top:100px" class="ball"></div>
+    			 <div id="load2" class="ball1"></div>
+			<h4 color="white" align="center">Loading please wait . . .</h4>
+			</div>	
+			
+				
+			{% include "metadashboard/icon_Subject.html" %}				
+				
+		</div>
+
+
+		<div id="ver" style="overflow:auto; width:900px; height:420px; top:315px; border:3px solid #888888;margin-top: 14px;margin-left: -63px;display:none">
+			
+			{% include "metadashboard/icon_Verb.html" %}
+			
+			
+				
+		</div>
+
+
+		<div id="obj" style="overflow:auto; width:900px; height:420px; top:315px; border:3px solid #888888;margin-top: 14px;margin-left: -63px;display:none">
+			
+			{% include "metadashboard/icon_Object.html" %}
+				
+				
+		</div>
+
+		<div id="new" style="overflow:auto; width:900px; height:420px; top:315px; border:3px solid #888888;margin-top: 14px;margin-left: -63px;display:none">
+
+			<!--<form>
+				<input type="button" value="Ok" onclick="getConfirmation();" />
+			</form>-->
+			
+		</div>
+
+		<!-- chat application div -->
+		<div id="chat" style="width:355px; height:420px; top:315px; border:3px solid #888888;margin-top: -426px;margin-left: 840px">
+			<div style="width:355px; height:40px; border:1px solid #888888;"><h3><font size="5">Chat</font></h3></div>
+			<div style="width:355px; height:215px;">
+				<span id="chat_sub"></span>&nbsp;
+					<span id="chat_ver"></span>&nbsp;
+						<span id="chat_obj"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			</div>		
+			<div id="chatSub" style="overflow:auto; width:355px; height:163px; border:1px solid #888888;">
+				{% include "metadashboard/icon_ChatSub.html" %}							
+			</div>
+			<div id="chatVer" style="overflow:auto; width:355px; height:163px; border:1px solid #888888;display:none">
+				{% include "metadashboard/icon_ChatVer.html" %}				
+			</div>
+			<div id="chatObj" style="overflow:auto; width:355px; height:163px; border:1px solid #888888;display:none">
+				{% include "metadashboard/icon_ChatObj.html" %}			
+			</div>
+		</div>
+
+<!-- -->
+
+	
+{% endblock %}			
+
