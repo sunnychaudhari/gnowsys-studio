@@ -56,6 +56,7 @@ urlpatterns = patterns(
     url(r'^admin/gstudio/', include('gstudio.urls.ajaxurls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^objects/admin/', include(admin.site.urls)),
+    url(r'^iconwrite/', include('gstudio.urls.iconwrite')),
     url(r'^nodetypes/admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^accounts/register/$', register, {'backend': 'gstudio.regbackend.MyBackend','form_class': UserRegistrationForm}, name='registration_register'),
